@@ -38,7 +38,7 @@ app.get('/', (req, res) => {
   console.log('Accept: ' + req.get('Accept'))
 
   pool.query('SELECT VERSION()', (err, version_results) => {
-    console.log(err, version_results.rows)
+    console.log(err, version_results)
 
     pool.query('SELECT * FROM team_members', (err, team_members_results) => {
       console.log(err, team_members_results)
