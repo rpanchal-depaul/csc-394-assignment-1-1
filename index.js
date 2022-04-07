@@ -17,7 +17,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Database
 const Pool = require('pg').Pool
 
-
 const connectionParams = process.env.DATABASE_URL || {
 
     user: 'api_user',
@@ -27,13 +26,7 @@ const connectionParams = process.env.DATABASE_URL || {
     port: 5432
 }
 
-const pool = new Pool({
-  user: 'api_user',
-  host: process.env.DATABASE_URL || 'localhost',
-  database: 'api',
-  password: 'password',
-  port: 5432
-})
+const pool = new Pool(connectionParams)
 
 
 app.get('/', (req, res) => {
