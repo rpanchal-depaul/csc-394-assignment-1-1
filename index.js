@@ -19,7 +19,7 @@ const Pool = require('pg').Pool
 
 var connectionParams = null;
 if (process.env.DATABASE_URL != null) {
-    connectionParams = { connectionString: process.env.DATABASE_URL }
+    connectionParams = { connectionString: process.env.DATABASE_URL, ssl: true }
 } else {
     connectionParams = {
         user: 'api_user',
