@@ -17,15 +17,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Database
 const Pool = require('pg').Pool
 
-const connectionParams = process.env.DATABASE_URL || {
-
-    user: 'api_user',
-    host: 'localhost',
-    database: 'api',
-    password: 'password',
-    port: 5432
+var connectionParams = null;
+if (process.env.DATABASE_URL != null) {
+    connectionParams = { connectionString: process.env.DATABASE_URL }
+} else {
+    connectionParams = {
+        user: 'api_user',
+        host: 'localhost',
+        database: 'api',
+        password: 'password',
+        port: 5432
+    }
 }
-
 const pool = new Pool(connectionParams)
 
 
