@@ -29,6 +29,7 @@ if (process.env.DATABASE_URL != null) {
         port: 5432
     }
 }
+console.log(connectionParams)
 const pool = new Pool(connectionParams)
 
 
