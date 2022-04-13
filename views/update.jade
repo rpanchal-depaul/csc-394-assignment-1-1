@@ -1,0 +1,37 @@
+script.
+  var update = function(team_member_id) {
+
+      console.log('update')
+  
+    var url = "/team_members/" + team_member_id
+
+    fetch(url, {
+        method: 'PUT',
+        body: JSON.stringify({
+            first_name: document.form.first_name.value,
+            last_name: document.form.last_name.value
+        })
+    })
+    .then((response) => response.json())
+    .then((json) => console.log(json));
+  }
+
+//-   <button onClick='update(7)'>Update </button>
+
+form(name="update-team-member", action='/team_members/#{teamMember.id}?_method=PUT', method="POST")
+
+        div.input
+            input(type="hidden", name="_method", value="PUT")
+
+        div.input
+            span.label First Name
+            input(type="text", name="first_name", value=teamMember.first_name)
+            
+        div.input
+            span.label Last Name
+            input(type="text", name="last_name", value=teamMember.last_name)
+            
+        div.actions
+            input(type="submit", value="update", onclick='update(#{teamMember.id})')
+            
+br

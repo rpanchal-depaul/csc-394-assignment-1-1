@@ -1,36 +1,43 @@
 doctype html
 
+script.
+  const deleteRecord = function(team_member_id) {
+    var url = "/team_members/" + team_member_id
+    fetch(url, {
+        method: 'DELETE',
+        body: JSON.stringify({
+            _method: 'DELETE'
+        })
+    })
+    .then((response) => {
+        console.log('reload')
+        location.reload() // Reloads the current page
+    })
+  }
+
 html
     head
     title Team #{teamNumber}
-body
-    h1 Database Version
-    p #{databaseVersion}
-
-    h2 Team Members
     
-    form(name="add-team-member", method="post")
-        div.input
-            span.label First Name
-            input(type="text", name="first_name")
-            
-        div.input
-            span.label Last Name
-            input(type="text", name="last_name")
-            
-        div.actions
-            input(type="submit", value="add")
-            
-    br
+body
+
+    a(href='/team_member_form') Create new team member
+
+    h1 Team Members
 
     table
         thead
             tr
                 td First Name
                 td Last Name
+                td Actions
         tbody
 
             each teamMember in teamMembers
                 tr
                     td #{teamMember.last_name}
                     td #{teamMember.first_name}
+                    td
+                        a(href='/team_members/#{teamMember.id}/form') Update
+                        button(onclick=`deleteRecord(${teamMember.id})`) Delete
+                                    
